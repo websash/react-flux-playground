@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, History } from 'react-router';
 import Button from '../Button';
 import * as acr from '../../actionCreators';
 import ProductsStore from '../../stores/ProductsStore';
@@ -14,9 +14,14 @@ function stateFromStores(props) {
 
 @storesConnector([ProductsStore], stateFromStores)
 class Single extends React.Component {
+
   static propTypes = {
     product: PropTypes.object,
     className: PropTypes.string
+  }
+
+  static contextTypes = {
+    router: PropTypes.func.isRequired
   }
 
   componentWillMount() {
@@ -25,6 +30,7 @@ class Single extends React.Component {
 
   render() {
     const { product, className } = this.props;
+    const { router } = this.context;
 
     return (
       <div className={joinClasses(s.products,
@@ -47,7 +53,10 @@ class Single extends React.Component {
             <div className={s.btns}>
               <Button className={s.btn}
                 onClick={acr.addItem.bind(this, product)}>Add To Cart</Button>
-              <Button className={s.btn} navTo="products">Back To Catalog</Button>
+              <Button className={s.btn} navTo="products" onClick={(e) =>
+                History.length > 1 ? (e.preventDefault(), router.goBack()) : true}>
+                Back To Catalog
+              </Button>
             </div>
           </div>
         </div>
