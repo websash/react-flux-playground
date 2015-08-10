@@ -1,0 +1,75 @@
+@import '../styles/vars.css';
+
+.main {
+  composes: container from '../styles/layout.css';
+  flex-basis: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.primary {
+  position: relative;
+  flex: 1;
+}
+.secondary {
+  position: relative;
+  order: 2;
+}
+.primary h1 {
+  font: 1.75rem/1.1 var(--font2), sans-serif;
+  border-bottom: 1px solid var(--color1);
+  margin: 0 0 1.5rem;
+}
+
+@media (--viewport-M) {
+  .main {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .secondary {
+    order: 2;
+    margin-left: 2rem;
+    padding-left: 2rem;
+    margin-bottom: 0;
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+  .primary {
+    order: 1;
+  }
+}
+
+@media (--viewport-S-to-M) {
+  .main {
+    flex-direction: column;
+  }
+  .secondary {
+    order: 2;
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+  .primary, .secondary  {
+    flex-basis: auto;
+    max-width: initial;
+  }
+  .primary {
+    order: 1;
+  }
+}
+
+@media (--viewport-L) {
+  .secondary {
+    flex-basis: 28%;
+    max-width: 28%;
+  }
+}
+
+@media (--viewport-XL) {
+  .secondary {
+    flex-basis: 22%;
+    max-width: 22%;
+  }
+}

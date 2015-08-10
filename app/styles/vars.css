@@ -1,0 +1,21 @@
+
+:root {
+  --color1: #585f68;
+  --color2: #f9f9f9;
+  --font1: "Open Sans";
+  --font2: "Open Sans Condensed";
+  --gutter-width: 1.5rem;
+}
+
+@custom-media --viewport-S       (min-width: 30em);
+@custom-media --viewport-S-to-M  (min-width: 30em) and (max-width: 40.63em);
+
+@custom-media --viewport-M       (min-width: 40.063em);
+@custom-media --viewport-M-to-L  (min-width: 40.063em) and (max-width: 64.063em);
+
+@custom-media --viewport-L       (min-width: 64.063em);
+@custom-media --viewport-L-to-XL (min-width: 64.063em) and (max-width: 80.063em);
+
+@custom-media --viewport-XL      (min-width: 80.063em);
+
+

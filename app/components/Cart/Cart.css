@@ -1,0 +1,48 @@
+@import '../../styles/vars.css';
+
+.left { text-align: left; }
+.right { text-align: right; }
+.center { text-align: center; }
+.btn {
+  padding: .15rem !important;
+  min-width: 1.75rem;
+}
+.btn + .btn {
+  border-left: none;
+  position: relative;
+  left: -2px;
+}
+.btnGroup {
+  display: inline-flex;
+  margin-left: 1rem;
+}
+.cart td, .cart th {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.cart tbody {
+  border-top: 1px solid color(var(--color1) a(.8));
+  border-bottom: 1px solid color(var(--color1) a(.8));
+}
+.cart tbody tr + tr {
+  border-top: 1px solid color(var(--color1) a(.4));
+}
+.cart tfoot {
+  font-weight: bold;
+}
+.cartsummary {
+  font: bold 1rem var(--font2), sans-serif;
+  text-decoration: none;
+  text-indent: 1.75rem;
+  background: url('./shopping_bag.png') 8px 50% no-repeat;
+  background-size: auto 80%;
+  color: var(--color2);
+}
+.cart a {
+  text-decoration: none;
+  font-weight: bold;
+  color: color(var(--color1) l(+10%));
+}
+.cart a:hover {
+  color: color(var(--color1) l(+3%) s(+20%));
+}

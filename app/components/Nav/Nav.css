@@ -1,0 +1,46 @@
+@import '../../styles/vars.css';
+
+.nav, .container {
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+}
+.container {
+  composes: container from '../../styles/layout.css';
+}
+.navbar {
+  background-color: var(--color1, #444);
+  color: var(--color2, #fff);
+  margin-bottom: 2rem;
+}
+.nav {
+  padding: 0;
+  font: bold 1rem var(--font2), sans-serif;
+  letter-spacing: 1px;
+}
+.navItem {
+  margin: 0;
+  list-style: none;
+}
+.navItem a {
+  text-decoration: none;
+}
+.nav > .navItem a, .cartsummary {
+  display: block;
+  padding: .75rem 1rem;
+  text-transform: uppercase;
+  color: var(--color2, #fff);
+}
+.navItem, .cartsummary {
+  transition: all .15s ease-out;
+}
+.nav > .navItem:hover, .cartsummary:hover {
+  background-color: color(var(--color2) a(.25));
+  transition: all .05s ease-out;
+}
+.nav > .navItem:global.active, .cartsummary:global.active {
+  background-color: color(var(--color2) a(.25));
+}
+.cartsummary {
+  margin-left: auto;
+}

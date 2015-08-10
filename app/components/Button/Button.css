@@ -1,0 +1,32 @@
+@import '../../styles/vars.css';
+
+.btn {
+  -webkit-appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.125rem;
+  padding: .2rem .5rem;
+  margin: 0;
+  min-height: 1.125rem;
+  border: 2px solid color(var(--color1) l(+5%));
+  vertical-align: middle;
+  color: color(var(--color1) l(+4%));
+  background-color: transparent;
+  transition: all .1s ease-out;
+}
+
+.btn:hover {
+  text-decoration: none;
+  background-color: color(var(--color1) l(+5%));
+  color: var(--color2);
+  transition: all .05s ease-out;
+}
+
+.btn:active {
+
+}
+
+.btn:focus {
+  outline: none;
+}

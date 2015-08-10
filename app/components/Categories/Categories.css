@@ -1,0 +1,58 @@
+@import '../../styles/vars.css';
+
+.aside {
+  position: relative;
+}
+.heading {
+  font: bold 1.5rem/1.1 var(--font2), sans-serif;
+  margin: 0;
+}
+.links {
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.links li {
+  list-style: none;
+}
+.links li a {
+  text-decoration: none;
+  padding: .1rem 0 .2rem;
+}
+.links li + li a {
+  border-top: 1px solid color(var(--color1) a(.6));
+}
+.links a {
+  display: block;
+  position: relative;
+  color: var(--color1, #666);
+  font: 1.05rem "Open Sans", sans-serif;
+  transition: all .1s ease-out;
+}
+.links a:hover {
+  padding-left: 1rem;
+  transition: all .28s cubic-bezier(0, 0.2, 0.13, 1.38);
+}
+.links li:global.active a {
+  padding-left: 1rem;
+}
+.links li {
+  position: relative;
+}
+.links li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  display: block;
+  position: absolute;
+  left: -5px;
+  top: .75rem;
+  background: var(--color1);
+  opacity: 0;
+  transition: all .1s ease-out;
+}
+.links li:global.active::before {
+  opacity: 1;
+  left: 5px;
+  transition: all .1s ease-out;
+}
+

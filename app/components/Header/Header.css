@@ -1,0 +1,26 @@
+@import '../../styles/vars.css';
+
+.header {
+  flex-shrink: 0;
+}
+.container {
+  composes: container from '../../styles/layout.css';
+}
+.logo {
+  color: var(--color1);
+}
+.logo:hover {
+  color: color(var(--color1) l(+10%) s(+15%));
+}
+.logo h1 {
+  text-transform: uppercase;
+  font: bold 2.2rem/.9 var(--font2), sans-serif;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+}
+.logo small {
+  font: 400 .68rem/1 var(--font1), sans-serif;
+  letter-spacing: 2px;
+  display: block;
+}

@@ -1,0 +1,58 @@
+@import '../../styles/vars.css';
+
+.body {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+.itmImg {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (--viewport-L) {
+  .body {
+    flex-flow: row;
+  }
+  .itmImg {
+    width: 45%;
+  }
+}
+
+.itmTitle {
+  margin: 0;
+  font: bold 1.5rem/1.1 var(--font2), sans-serif;
+}
+.itmImg {
+  opacity: .75;
+}
+.btns {
+  margin-left: auto;
+}
+.btn {
+  text-transform: uppercase;
+  font-size: .8rem;
+  font-weight: bold;
+  border-width: 2px;
+  margin-left: 1rem;
+}
+.itmDescription {
+  overflow: hidden;
+}
+.itmPrice {
+  padding: 0 0 0 .4rem;
+  margin: 0;
+  font: 1.25rem var(--font2), sans-serif;
+  color: color(var(--color1) l(-5%));
+}
+.oldPrice {
+  text-decoration: line-through;
+  font: 400 .9rem var(--font1), sans-serif;
+  color: var(--color1);
+}
+.itmMeta {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid color(var(--color1) a(.6));
+  padding: 1rem 0;
+}
