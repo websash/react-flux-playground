@@ -43,7 +43,7 @@ export default class Cart extends React.Component {
             return (
               <tr key={i}>
                 <td>
-                  <Link to="product" params={{productId: id, categoryId: category_id}}>
+                  <Link to={`/products/${category_id}/${id}`}>
                     {title}</Link>
                 </td>
                 <td className={s.right}>{cartItem.qty} <span className={s.btnGroup}>

@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
-import { RouteHandler } from 'react-router';
+import React, { PropTypes, cloneElement } from 'react';
 import Categories from '../components/Categories';
 import CategoriesStore from '../stores/CategoriesStore';
 import storesConnector from '../utils/storesConnector';
 import s from './views.css';
+import PrListing from '../components/Products/Listing';
+
+// const { CSSTransitionGroup } = React.addons;
 
 function stateFromStores(props) {
   return { category: CategoriesStore.getCategory(props) }
@@ -13,23 +15,27 @@ function stateFromStores(props) {
 class ProductsVew extends React.Component {
 
   render() {
-    const { path, params, category } = this.props;
-
+    const { location, params, category, children } = this.props;
+    const { pathname } = location;
     const title =
-      path.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
-      path.match(/sales$/) && `Sales` ||
-      path.match(/category/) && category && `Category: ${category.name}` || '';
+      pathname.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
+      pathname.match(/sales$/) && `Sales` ||
+      pathname.match(/category/) && category && `Category: ${category.name}` || '';
 
     return (
       <section className={s.main}>
         <div className={s.primary}>
           <h1 className="spinner">{title}</h1>
-          <div className="fadetarget">
-            <RouteHandler L="2" XL="3" {...this.props} />
-          </div>
+          {/* <CSSTransitionGroup component="div" transitionName="view"> */}
+          {
+            cloneElement(children || <PrListing/>,
+              {L: '2', XL: '3', key: pathname, ...this.props})
+            // children || <PrListing L="2" XL="3" key={pathname} {...this.props}/>
+          }
+          {/* </CSSTransitionGroup> */}
         </div>
         <div className={s.secondary}>
-          <Categories category={category} />
+          <Categories {...this.props} />
         </div>
       </section>
     )

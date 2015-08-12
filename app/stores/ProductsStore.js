@@ -8,15 +8,18 @@ const Store = createStore({
   pending: false,
 
   getCatalog(props) {
-    const { path, params } = props;
+    // console.log('getCatalog props', props);
+    const { location, params } = props;
+    const { pathname } = location;
 
     const catalog =
 
-      /^\/$/.test(path) && _catalog.filter(product => product.featured) ||
+      /^\/$/.test(pathname) && _catalog.filter(product => product.featured) ||
 
-      /^\/sales$/.test(path) && _catalog.filter(product => product.sale_price) ||
+      /^\/sales$/.test(pathname) && _catalog.filter(product => product.sale_price) ||
 
-      /\/category/.test(path) && params.categoryId && /^[0-9]+$/.test(params.categoryId) &&
+      /\/category/.test(pathname) &&
+        params.categoryId && /^[0-9]+$/.test(params.categoryId) &&
         _catalog.filter(product => params.categoryId == product.category_id) ||
 
       _catalog;

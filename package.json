@@ -10,8 +10,9 @@
     "babel-runtime": "^5.5.8",
     "dompurify": "^0.6.5",
     "flux": "^2.0.3",
+    "history": "^1.1.0",
     "react": "^0.13.3",
-    "react-router": "^0.13.3",
+    "react-router": "^1.0.0-beta3",
     "whatwg-fetch": "^0.9.0"
   },
   "devDependencies": {
@@ -34,7 +35,8 @@
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.9.10",
-    "webpack-dev-server": "^1.9.0"
+    "webpack-dev-server": "^1.9.0",
+    "webpack-notifier": "^1.2.1"
   },
   "author": "Alexander Fomin",
   "license": "MIT"

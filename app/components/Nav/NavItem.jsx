@@ -10,21 +10,19 @@ export default class NavItem extends React.Component {
   }
 
   static contextTypes = {
-    router: PropTypes.func.isRequired
+    router: PropTypes.object.isRequired
   }
 
   render() {
+    // console.log(this.context.router.isActive(navTo));
     const { navTo, children, onClick, className } = this.props;
 
     const classes = joinClasses(s.navItem, className,
       (this.context.router.isActive(navTo) ? 'active' : ''));
 
-    const anchor = navTo.match(/(#.*)/);
-
     return (
       <li className={classes}>
-        <Link to={anchor ? this.context.router.getCurrentPath() + `${anchor[1]}` : navTo}
-          onClick={onClick}>{children}</Link>
+        <Link to={navTo} onClick={onClick}>{children}</Link>
       </li>
       )
   }

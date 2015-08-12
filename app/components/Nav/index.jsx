@@ -11,10 +11,9 @@ export default class Nav extends React.Component {
         <div className={s.container}>
           <ul className={s.nav}>
             <NavItem navTo="/">Home</NavItem>
-            <NavItem navTo="products">Products</NavItem>
-            <NavItem navTo="sales">Sales</NavItem>
-            <NavItem navTo="#">Ipsum</NavItem>
-            <NavItem navTo="#">Lorem</NavItem>
+            <NavItem navTo="/products">Products</NavItem>
+            <NavItem navTo="/sales">Sales</NavItem>
+
           </ul>
           <CartSummary className={s.cartsummary} />
         </div>

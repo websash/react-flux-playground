@@ -11,12 +11,10 @@ class SalesView extends React.Component {
       <section className={s.main}>
         <div className={s.primary}>
           <h1 className="spinner">Sales</h1>
-          <div className="fadetarget">
-            <PrListing L="2" XL="3" {...this.props} />
-          </div>
+          <PrListing L="2" XL="3" {...this.props} />
         </div>
         <div className={s.secondary}>
-          <Categories />
+          <Categories {...this.props} />
         </div>
       </section>
     )

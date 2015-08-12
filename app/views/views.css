@@ -22,6 +22,30 @@
   margin: 0 0 1.5rem;
 }
 
+/* ↓ CSSTransitionGroup animation */
+.primary {
+  overflow: hidden;
+}
+.primary > div {
+  position: relative;
+}
+.primary :global(.view-enter) {
+  opacity: 0.01;
+}
+.primary :global(.view-enter.view-enter-active) {
+  opacity: 1;
+  transition: opacity .5s cubic-bezier(0, 0.25, 0, 1);
+}
+.primary :global(.view-leave) {
+  position: absolute; top: 0; left: 0; right: 0;
+  opacity: 1;
+  transition: opacity .2s ease-out;
+}
+.primary :global(.view-leave.view-leave-active) {
+  opacity: 0;
+}
+/* ↑ CSSTransitionGroup animation */
+
 @media (--viewport-M) {
   .main {
     flex-direction: row;

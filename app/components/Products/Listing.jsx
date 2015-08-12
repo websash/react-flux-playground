@@ -38,19 +38,18 @@ class Listing extends React.Component {
     );
 
     return (
+      <div>
       <div className={joinClasses(s.products,
           ProductsStore.pending && 'pending', className)}>
       {
         catalog && catalog.map((item, i) =>
           <div className={itmClasses} key={i}>
 
-            <Link className={s.itmTitle} to="product"
-              params={{productId: item.id, categoryId: item.category_id}}>
+            <Link className={s.itmTitle} to={`/products/${item.category_id}/${item.id}`}>
               <h3>{item.title}</h3>
             </Link>
 
-            <Link className={s.itmImg} to="product"
-              params={{productId: item.id, categoryId: item.category_id}}>
+            <Link className={s.itmImg} to={`/products/${item.category_id}/${item.id}`}>
               <img src={item.image} />
             </Link>
 
@@ -68,6 +67,7 @@ class Listing extends React.Component {
           </div>
         )
       }
+      </div>
       </div>
     )
   }

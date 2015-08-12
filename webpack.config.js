@@ -1,6 +1,7 @@
 /* eslint-disable no-var */
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackNotifierPlugin = require('webpack-notifier');
 var path = require('path');
 
 module.exports = {
@@ -67,6 +68,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('styles.css', { allChunks: true }),
     new webpack.HotModuleReplacementPlugin(),
+    new WebpackNotifierPlugin(),
     new webpack.NoErrorsPlugin()
   ],
 

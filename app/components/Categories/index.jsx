@@ -39,7 +39,7 @@ class Categories extends React.Component {
         {
           categories.map(cat =>
             <li key={cat.id} className={curCatId == cat.id ? 'active' : ''}>
-              <Link to="category" params={{categoryId: cat.id}}>{cat.name}</Link>
+              <Link to={`/products/category/${cat.id}`}>{cat.name}</Link>
             </li>)
         }
         </ul>

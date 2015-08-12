@@ -24,7 +24,7 @@ class CartSummary extends React.Component {
   render() {
     const { items, total, className } = this.props;
     return (
-      <Link to="cart" className={joinClasses(className, s.cartsummary)}>
+      <Link to="/cart" className={joinClasses(className, s.cartsummary)}>
         Cart: { items.length > 0 ? `${items.length} / $${total}` : `empty` }
       </Link>
     )
