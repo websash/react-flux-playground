@@ -1,6 +1,11 @@
+/* eslint-disable no-var */
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+
+var config =
+  process.env.NODE_ENV === 'development'
+  ? require('./webpack.config.dev')
+  : require('./webpack.config.prod');
 
 var server = new WebpackDevServer(webpack(config), {
   hot: true,
