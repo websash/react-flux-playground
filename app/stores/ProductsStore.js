@@ -4,6 +4,25 @@ import { createStore } from '../utils/StoreUtils';
 
 let _catalog = [];
 
+const dispatcherCallback = action => {
+  switch(action.type) {
+    case ACT.REQUEST_PRODUCTS:
+      Store.pending = true;
+      break;
+
+    case ACT.REQUEST_PRODUCTS_SUCCESS:
+      Store.pending = false;
+      _catalog = action.data;
+      break;
+
+    case ACT.REQUEST_PRODUCTS_FAIL:
+      Store.pending = false;
+      // err handling...
+      break;
+  }
+  Store.emitChange();
+}
+
 const Store = createStore({
   pending: false,
 
@@ -33,29 +52,7 @@ const Store = createStore({
       _catalog.filter(product => params.productId == product.id)[0];
   },
 
-  dispatchToken: register(action => {
-    switch(action.type) {
-      case ACT.REQUEST_PRODUCTS:
-        Store.pending = true;
-        break;
-
-      case ACT.REQUEST_PRODUCTS_SUCCESS:
-        Store.pending = false;
-        _catalog = action.data;
-        break;
-
-      case ACT.REQUEST_PRODUCTS_FAIL:
-        Store.pending = false;
-        break;
-
-      default:
-        return true;
-    }
-
-    Store.emitChange();
-    return true;
-  })
-
+  dispatchToken: register(dispatcherCallback)
 });
 
 export default Store;

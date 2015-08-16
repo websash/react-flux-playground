@@ -18,22 +18,18 @@ export function requestCategories() {
     .catch(error => dispatch(ACT.REQUEST_CATEGORIES_FAIL, {error}));
 }
 
-export function selectCategory(category) {
-  dispatch(ACT.SELECT_CATEGORY, {category})
+export function addProduct(product) {
+  dispatch(ACT.CART_ADD_PRODUCT, {product})
 }
 
-export function addItem(item) {
-  dispatch(ACT.CART_ADD_ITEM, {item})
+export function removeProduct(product) {
+  dispatch(ACT.CART_REMOVE_PRODUCT, {product})
 }
 
-export function removeItem(index) {
-  dispatch(ACT.CART_REMOVE_ITEM, {index})
+export function decreaseProduct(product) {
+  dispatch(ACT.CART_DECREMENT_PRODUCT, {product})
 }
 
-export function decreaseItem(index) {
-  dispatch(ACT.CART_DECREASE_ITEM, {index})
-}
-
-export function increaseItem(index) {
-  dispatch(ACT.CART_INCREASE_ITEM, {index})
+export function increaseProduct(product) {
+  dispatch(ACT.CART_INCREMENT_PRODUCT, {product})
 }

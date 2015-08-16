@@ -4,27 +4,27 @@ import * as acr from '../../actionCreators';
 import s from './Cart.css';
 
 export class ItmIncrease extends React.Component {
-  static propTypes = { index: PropTypes.number }
+  static propTypes = { item: PropTypes.object }
 
   render() {
     return <Button className={s.btn}
-      onClick={acr.increaseItem.bind(this, this.props.index)}>+</Button>
+      onClick={acr.increaseProduct.bind(this, this.props.item.product)}>+</Button>
   }
 }
 
 export class ItmDecrease extends React.Component {
-  static propTypes = { index: PropTypes.number }
+  static propTypes = { item: PropTypes.object }
   render() {
     return <Button className={s.btn}
-      onClick={acr.decreaseItem.bind(this, this.props.index)}>-</Button>
+      onClick={acr.decreaseProduct.bind(this, this.props.item.product)}>-</Button>
   }
 }
 
 export class ItmRemove extends React.Component {
-  static propTypes = { index: PropTypes.number }
+  static propTypes = { item: PropTypes.object }
 
   render() {
     return <Button className={s.btn}
-      onClick={acr.removeItem.bind(this, this.props.index)}>x</Button>
+      onClick={acr.removeProduct.bind(this, this.props.item.product)}>x</Button>
   }
 }

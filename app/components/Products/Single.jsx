@@ -53,7 +53,7 @@ class Single extends React.Component {
             </p>
             <div className={s.btns}>
               <Button className={s.btn}
-                onClick={acr.addItem.bind(this, product)}>Add To Cart</Button>
+                onClick={acr.addProduct.bind(this, product)}>Add To Cart</Button>
               <Button className={s.btn} navTo="/products">
                 {/* need normalized history length or route referrer  */}
                 Back To Catalog

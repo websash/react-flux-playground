@@ -42,28 +42,28 @@ class Listing extends React.Component {
       <div className={joinClasses(s.products,
           ProductsStore.pending && 'pending', className)}>
       {
-        catalog && catalog.map((item, i) =>
-          <div className={itmClasses} key={i}>
+        catalog && catalog.map(product =>
+          <div className={itmClasses} key={product.id}>
 
-            <Link className={s.itmTitle} to={`/products/${item.category_id}/${item.id}`}>
-              <h3>{item.title}</h3>
+            <Link className={s.itmTitle} to={`/products/${product.category_id}/${product.id}`}>
+              <h3>{product.title}</h3>
             </Link>
 
-            <Link className={s.itmImg} to={`/products/${item.category_id}/${item.id}`}>
-              <img src={item.image} />
+            <Link className={s.itmImg} to={`/products/${product.category_id}/${product.id}`}>
+              <img src={product.image} />
             </Link>
 
             <div className={s.itmMeta}>
-              { item.sale_price && <p className={s.itmPrice}>${item.sale_price}</p> }
-              <p className={joinClasses(s.itmPrice, item.sale_price && s.oldPrice)}>
-                ${item.price}
+              { product.sale_price && <p className={s.itmPrice}>${product.sale_price}</p> }
+              <p className={joinClasses(s.itmPrice, product.sale_price && s.oldPrice)}>
+                ${product.price}
               </p>
               <Button className={s.itmAdd2Cart}
-                onClick={acr.addItem.bind(this, item)}>To Cart
+                onClick={acr.addProduct.bind(this, product)}>To Cart
               </Button>
             </div>
 
-            <p className={s.itmSummary}>{item.summary}</p>
+            <p className={s.itmSummary}>{product.summary}</p>
           </div>
         )
       }
