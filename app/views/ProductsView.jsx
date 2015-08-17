@@ -1,4 +1,5 @@
 import React, { PropTypes, cloneElement } from 'react';
+import ProductsStore from '../stores/ProductsStore';
 import Categories from '../components/Categories';
 import CategoriesStore from '../stores/CategoriesStore';
 import storesConnector from '../utils/storesConnector';
@@ -8,19 +9,18 @@ import PrListing from '../components/Products/Listing';
 // const { CSSTransitionGroup } = React.addons;
 
 function stateFromStores(props) {
-  return { category: CategoriesStore.getCategory(props) }
+  return {
+    title: ProductsStore.getTitle(props),
+    category: CategoriesStore.getCategory(props)
+  }
 }
 
-@storesConnector([CategoriesStore], stateFromStores)
+@storesConnector([ProductsStore, CategoriesStore], stateFromStores)
 class ProductsVew extends React.Component {
 
   render() {
-    const { location, params, category, children } = this.props;
+    const { title, location, category, children } = this.props;
     const { pathname } = location;
-    const title =
-      pathname.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
-      pathname.match(/sales$/) && `Sales` ||
-      pathname.match(/category/) && category && `Category: ${category.name}` || '';
 
     return (
       <section className={s.main}>

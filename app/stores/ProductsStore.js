@@ -1,6 +1,7 @@
 import * as ACT from '../actionTypes';
-import { register } from '../dispatcher';
+import { register, waitFor } from '../dispatcher';
 import { createStore } from '../utils/StoreUtils';
+import CategoriesStore from './CategoriesStore';
 
 let _catalog = [];
 
@@ -11,6 +12,7 @@ const dispatcherCallback = action => {
       break;
 
     case ACT.REQUEST_PRODUCTS_SUCCESS:
+      waitFor([CategoriesStore.dispatchToken]);
       Store.pending = false;
       _catalog = action.data;
       break;
@@ -50,6 +52,18 @@ const Store = createStore({
     const { params } = props;
     return params.productId && /^[0-9]+$/.test(params.productId) &&
       _catalog.filter(product => params.productId == product.id)[0];
+  },
+
+  getTitle(props) {
+    const { location } = props;
+    const { pathname } = location;
+    const category = CategoriesStore.getCategory(props);
+
+    const title =
+      pathname.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
+      pathname.match(/sales$/) && `Sales` ||
+      pathname.match(/category/) && category && `Category: ${category.name}` || '';
+    return title;
   },
 
   dispatchToken: register(dispatcherCallback)

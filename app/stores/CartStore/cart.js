@@ -33,7 +33,7 @@ export function decrementProduct(product, cart) {
 }
 
 export function cartTotal(cart) {
-  return cart.map(itm =>
+  return +cart.map(itm =>
     +((itm.product.sale_price || itm.product.price) * itm.qty).toFixed(2)
   ).reduce((total, subtotal) => total + subtotal, 0).toFixed(2);
 }
