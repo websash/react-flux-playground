@@ -19,8 +19,7 @@ function stateFromStores(props) {
 class ProductsVew extends React.Component {
 
   render() {
-    const { title, location, category, children } = this.props;
-    const { pathname } = location;
+    const { title, location: { pathname }, category, children } = this.props;
 
     return (
       <section className={s.main}>

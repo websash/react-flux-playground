@@ -19,7 +19,7 @@ const dispatcherCallback = action => {
 
     case ACT.REQUEST_PRODUCTS_FAIL:
       Store.pending = false;
-      // err handling...
+      // alert(`[${action.error}] ${ACT.REQUEST_PRODUCTS_FAIL}`)
       break;
   }
   Store.emitChange();
@@ -28,42 +28,30 @@ const dispatcherCallback = action => {
 const Store = createStore({
   pending: false,
 
-  getCatalog(props) {
-    // console.log('getCatalog props', props);
-    const { location, params } = props;
-    const { pathname } = location;
+  getCatalog({ location: { pathname: pn }, params: { categoryId: cid } }) {
+    return (
+      /^\/$/.test(pn) && _catalog.filter(product => product.featured) ||
 
-    const catalog =
+      /^\/sales$/.test(pn) && _catalog.filter(product => product.sale_price) ||
 
-      /^\/$/.test(pathname) && _catalog.filter(product => product.featured) ||
+      /\/category/.test(pn) && cid && /^[0-9]+$/.test(cid) &&
+          _catalog.filter(product => cid == product.category_id) ||
 
-      /^\/sales$/.test(pathname) && _catalog.filter(product => product.sale_price) ||
-
-      /\/category/.test(pathname) &&
-        params.categoryId && /^[0-9]+$/.test(params.categoryId) &&
-        _catalog.filter(product => params.categoryId == product.category_id) ||
-
-      _catalog;
-
-    return catalog;
+      _catalog
+    );
   },
 
-  getProduct(props) {
-    const { params } = props;
-    return params.productId && /^[0-9]+$/.test(params.productId) &&
-      _catalog.filter(product => params.productId == product.id)[0];
+  getProduct({ params: { productId: pid } }) {
+    return pid && /^[0-9]+$/.test(pid) && _catalog.filter(product => pid == product.id)[0];
   },
 
-  getTitle(props) {
-    const { location } = props;
-    const { pathname } = location;
-    const category = CategoriesStore.getCategory(props);
-
-    const title =
-      pathname.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
-      pathname.match(/sales$/) && `Sales` ||
-      pathname.match(/category/) && category && `Category: ${category.name}` || '';
-    return title;
+  getTitle({ location: { pathname: pn }, params }) {
+    const category = CategoriesStore.getCategory({ params });
+    return (
+      pn.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
+      pn.match(/sales$/) && `Sales` ||
+      pn.match(/category/) && category && `Category: ${category.name}` || ''
+    );
   },
 
   dispatchToken: register(dispatcherCallback)

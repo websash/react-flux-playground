@@ -1,34 +1,28 @@
-export function isProductInCart(product, cart) {
-  return cart.some(itm => itm.product.id === product.id);
+export function isProductInCart({ id }, cart) {
+  return cart.some(itm => itm.product.id === id);
 }
 
 export function addProduct(product, cart) {
   return isProductInCart(product, cart) ?
-    incrementProduct(product, cart) : cart.concat({product, qty: 1});
+    incrementProduct(product, cart) : [...cart, { product, qty: 1 }];
 }
 
-export function removeProduct(product, cart) {
+export function removeProduct({ id }, cart) {
   return cart.reduce((cart, itm) =>
-    (itm.product.id !== product.id && cart.push(itm), cart), []);
+    (itm.product.id !== id && cart.push(itm), cart), []);
 }
 
-export function incrementProduct(product, cart) {
-  return cart.map(itm =>
-    ({
-      product: itm.product,
-      qty: itm.product.id === product.id ?
-        itm.qty + 1 : itm.qty
-    })
+export function incrementProduct({ id }, cart) {
+  return cart.map(
+    ({ product, qty }) =>
+      ({ product, qty: product.id === id ? ++qty : qty })
   );
 }
 
-export function decrementProduct(product, cart) {
-  return cart.map(itm =>
-    ({
-      product: itm.product,
-      qty: itm.product.id === product.id ?
-        Math.max(1, itm.qty - 1) : itm.qty
-    })
+export function decrementProduct({ id }, cart) {
+  return cart.map(
+    ({ product, qty }) =>
+      ({ product, qty: product.id === id ? Math.max(1, --qty) : qty })
   );
 }
 

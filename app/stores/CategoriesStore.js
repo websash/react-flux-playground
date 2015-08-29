@@ -17,7 +17,7 @@ const dispatcherCallback = action => {
 
     case ACT.REQUEST_CATEGORIES_FAIL:
       Store.pending = false;
-      // err handling...
+      // alert(`[${action.error}] ${ACT.REQUEST_CATEGORIES_FAIL}`)
       break;
   }
   Store.emitChange();
@@ -28,8 +28,7 @@ const Store = createStore({
 
   getCategories() { return _categories },
 
-  getCategory(props) {
-    const { params } = props;
+  getCategory({ params }) {
     return _categories.filter(cat => cat.id == params.categoryId)[0];
   },
 
