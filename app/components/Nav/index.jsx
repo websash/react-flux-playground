@@ -1,8 +1,8 @@
-import React from 'react';
-import NavItem from './NavItem';
-import CartSummary from '../Cart/CartSummary';
-import joinClasses from 'react/lib/joinClasses';
-import s from './Nav.css';
+import React from 'react'
+import NavItem from './NavItem'
+import CartSummary from '../Cart/CartSummary'
+import joinClasses from 'react/lib/joinClasses'
+import s from './Nav.css'
 
 export default class Nav extends React.Component {
   render() {

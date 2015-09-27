@@ -1,34 +1,34 @@
-import * as ACT from '../actionTypes';
-import { register, waitFor } from '../dispatcher';
-import { createStore } from '../utils/StoreUtils';
-import CategoriesStore from './CategoriesStore';
+import * as ACT from '../actionTypes'
+import {register, waitFor} from '../dispatcher'
+import {createStore} from '../utils/StoreUtils'
+import CategoriesStore from './CategoriesStore'
 
-let _catalog = [];
+let _catalog = []
 
 const dispatcherCallback = action => {
   switch(action.type) {
     case ACT.REQUEST_PRODUCTS:
-      Store.pending = true;
-      break;
+      Store.pending = true
+      break
 
     case ACT.REQUEST_PRODUCTS_SUCCESS:
-      waitFor([CategoriesStore.dispatchToken]);
-      Store.pending = false;
-      _catalog = action.data;
-      break;
+      waitFor([CategoriesStore.dispatchToken])
+      Store.pending = false
+      _catalog = action.data
+      break
 
     case ACT.REQUEST_PRODUCTS_FAIL:
-      Store.pending = false;
+      Store.pending = false
       // alert(`[${action.error}] ${ACT.REQUEST_PRODUCTS_FAIL}`)
-      break;
+      break
   }
-  Store.emitChange();
+  Store.emitChange()
 }
 
 const Store = createStore({
   pending: false,
 
-  getCatalog({ location: { pathname: pn }, params: { categoryId: cid } }) {
+  getCatalog({location: {pathname: pn}, params: {categoryId: cid}}) {
     return (
       /^\/$/.test(pn) && _catalog.filter(product => product.featured) ||
 
@@ -38,23 +38,23 @@ const Store = createStore({
           _catalog.filter(product => cid == product.category_id) ||
 
       _catalog
-    );
+    )
   },
 
-  getProduct({ params: { productId: pid } }) {
-    return pid && /^[0-9]+$/.test(pid) && _catalog.filter(product => pid == product.id)[0];
+  getProduct({params: {productId: pid}}) {
+    return pid && /^[0-9]+$/.test(pid) && _catalog.filter(product => pid == product.id)[0]
   },
 
-  getTitle({ location: { pathname: pn }, params }) {
-    const category = CategoriesStore.getCategory({ params });
+  getTitle({location: {pathname: pn}, params}) {
+    const category = CategoriesStore.getCategory({params})
     return (
       pn.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
       pn.match(/sales$/) && `Sales` ||
       pn.match(/category/) && category && `Category: ${category.name}` || ''
-    );
+    )
   },
 
   dispatchToken: register(dispatcherCallback)
-});
+})
 
-export default Store;
+export default Store

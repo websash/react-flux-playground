@@ -1,12 +1,12 @@
 /* eslint-disable no-var */
-var webpack = require('webpack');
-var WebpackNotifierPlugin = require('webpack-notifier');
-var path = require('path');
+var webpack = require('webpack')
+var WebpackNotifierPlugin = require('webpack-notifier')
+var path = require('path')
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+    'webpack/hot/dev-server',
     './app/main.jsx'
   ],
 
@@ -46,9 +46,9 @@ module.exports = {
         // https://github.com/postcss/postcss-import
         onImport: function(files) {
           files.forEach(function(file) {
-            this.addDependency(file);
-            // console.log('Watching %s', file);
-          }.bind(this));
+            this.addDependency(file)
+            // console.log('Watching %s', file)
+          }.bind(this))
         }.bind(this)
       }),
       require('postcss-custom-media'),
@@ -58,7 +58,7 @@ module.exports = {
       require('autoprefixer-core')({
         browsers: ['last 2 versions']
       })
-    ];
+    ]
   },
 
   resolve: {

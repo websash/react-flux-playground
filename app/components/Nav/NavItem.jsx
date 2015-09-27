@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import joinClasses from 'react/lib/joinClasses';
-import s from './Nav.css';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
+import joinClasses from 'react/lib/joinClasses'
+import s from './Nav.css'
 
 export default class NavItem extends React.Component {
   static propTypes = {
@@ -10,15 +10,20 @@ export default class NavItem extends React.Component {
   }
 
   static contextTypes = {
-    router: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   }
 
   render() {
-    // console.log(this.context.router.isActive(navTo));
-    const { navTo, children, onClick, className } = this.props;
+    const {navTo, children, onClick, className} = this.props
+    const {history, location: {pathname}} = this.context
+
+    // console.log(navTo, '\t', pathname, '\t', history.isActive(navTo))
 
     const classes = joinClasses(s.navItem, className,
-      (this.context.router.isActive(navTo) ? 'active' : ''));
+      navTo === pathname ||
+      navTo !== '/' && pathname !== '/' &&
+      history.isActive(navTo) ? 'active' : '')
 
     return (
       <li className={classes}>

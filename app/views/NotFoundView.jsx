@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import s from './views.css';
+import React, {PropTypes} from 'react'
+import s from './views.css'
 
 class NotFoundView extends React.Component {
 
@@ -12,4 +12,4 @@ class NotFoundView extends React.Component {
   }
 }
 
-export default NotFoundView;
+export default NotFoundView

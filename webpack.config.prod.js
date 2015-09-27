@@ -1,8 +1,8 @@
 /* eslint-disable no-var */
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WebpackNotifierPlugin = require('webpack-notifier');
-var path = require('path');
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var WebpackNotifierPlugin = require('webpack-notifier')
+var path = require('path')
 
 module.exports = {
   entry: './app/main.jsx',
@@ -41,8 +41,8 @@ module.exports = {
       require('postcss-import')({
         onImport: function(files) {
           files.forEach(function(file) {
-            this.addDependency(file);
-          }.bind(this));
+            this.addDependency(file)
+          }.bind(this))
         }.bind(this)
       }),
       require('postcss-custom-media'),
@@ -52,7 +52,7 @@ module.exports = {
       require('autoprefixer-core')({
         browsers: ['last 2 versions']
       })
-    ];
+    ]
   },
 
   resolve: {

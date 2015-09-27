@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
-import Button from '../Button';
-import * as acr from '../../actionCreators';
-import s from './Cart.css';
+import React, {PropTypes} from 'react'
+import Button from '../Button'
+import * as acr from '../../actionCreators'
+import s from './Cart.css'
 
 export class ItmIncrease extends React.Component {
   static propTypes = { item: PropTypes.object }

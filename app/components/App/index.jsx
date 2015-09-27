@@ -1,8 +1,8 @@
-import React, { cloneElement } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import HomeView from '../../views/HomeView';
-import s from './App.css';
+import React, {cloneElement} from 'react'
+import Header from '../Header'
+import Footer from '../Footer'
+import HomeView from '../../views/HomeView'
+import s from './App.css'
 
 
 export default class App extends React.Component {
@@ -13,6 +13,6 @@ export default class App extends React.Component {
         {this.props.children || <HomeView {...this.props}/>}
         <Footer />
       </div>
-    );
+    )
   }
 }

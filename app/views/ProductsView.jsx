@@ -1,16 +1,18 @@
-import React, { PropTypes, cloneElement } from 'react';
-import ProductsStore from '../stores/ProductsStore';
-import Categories from '../components/Categories';
-import CategoriesStore from '../stores/CategoriesStore';
-import storesConnector from '../utils/storesConnector';
-import s from './views.css';
-import PrListing from '../components/Products/Listing';
+import React, {PropTypes, cloneElement} from 'react'
+import PrListing from '../components/Products/Listing'
+import Categories from '../components/Categories'
+import ProductsStore from '../stores/ProductsStore'
+import CategoriesStore from '../stores/CategoriesStore'
+import storesConnector from '../utils/storesConnector'
+import Spinner from '../components/Spinner'
+import s from './views.css'
 
-// const { CSSTransitionGroup } = React.addons;
+// const { CSSTransitionGroup } = React.addons
 
 function stateFromStores(props) {
   return {
     title: ProductsStore.getTitle(props),
+    catalog: ProductsStore.getCatalog(props),
     category: CategoriesStore.getCategory(props)
   }
 }
@@ -19,12 +21,12 @@ function stateFromStores(props) {
 class ProductsVew extends React.Component {
 
   render() {
-    const { title, location: { pathname }, category, children } = this.props;
+    const {title, location: {pathname}, category, children} = this.props
 
     return (
       <section className={s.main}>
         <div className={s.primary}>
-          <h1 className="spinner">{title}</h1>
+          <h1>{title} <Spinner active={ProductsStore.pending} /></h1>
           {/* <CSSTransitionGroup component="div" transitionName="view"> */}
           {
             cloneElement(children || <PrListing/>,
@@ -41,4 +43,4 @@ class ProductsVew extends React.Component {
   }
 }
 
-export default ProductsVew;
+export default ProductsVew
