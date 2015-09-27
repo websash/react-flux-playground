@@ -1,7 +1,7 @@
-import React from 'react';
-import Nav from '../Nav';
-import { Link } from 'react-router';
-import s from './Header.css';
+import React from 'react'
+import Nav from '../Nav'
+import {Link} from 'react-router'
+import s from './Header.css'
 
 class Header extends React.Component {
   render() {
@@ -12,8 +12,8 @@ class Header extends React.Component {
         </div>
         <Nav />
       </header>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

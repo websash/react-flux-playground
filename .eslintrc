@@ -27,9 +27,10 @@
     "react/no-unknown-property": 2,
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 2,
-    "react/self-closing-comp": 2,
+    "react/self-closing-comp": 1,
     "react/wrap-multilines": 1,
     "quotes": [2, "single"],
+    "semi": [2, "never"],
     "space-before-function-paren": [2, {
       "anonymous": "never",
       "named": "never"

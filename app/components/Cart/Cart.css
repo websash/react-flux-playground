@@ -16,6 +16,9 @@
   display: inline-flex;
   margin-left: 1rem;
 }
+.cart {
+  margin-top: 1.5rem;
+}
 .cart td, .cart th {
   padding-left: 1rem;
   padding-right: 1rem;

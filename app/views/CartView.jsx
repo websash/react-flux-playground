@@ -1,8 +1,8 @@
-import React from 'react';
-import Cart from '../components/Cart';
-// import Categories from '../components/Categories';
-import joinClasses from 'react/lib/joinClasses';
-import s from './views.css';
+import React from 'react'
+import Cart from '../components/Cart'
+// import Categories from '../components/Categories'
+import joinClasses from 'react/lib/joinClasses'
+import s from './views.css'
 
 
 class CartView extends React.Component {
@@ -18,4 +18,4 @@ class CartView extends React.Component {
   }
 }
 
-export default CartView;
+export default CartView

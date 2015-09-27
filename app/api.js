@@ -1,32 +1,31 @@
-import 'whatwg-fetch';
+import 'whatwg-fetch'
 
-const API_ROOT = process.env.API_ROOT || 'http://localhost:3000/api/';
+const API_ROOT = process.env.API_ROOT || 'http://localhost:3000/api/'
 
-export const utils = {
+const utils = {
   handleStatus(response) {
     return new Promise((resolve, reject) => {
       if (response.status >= 200 && response.status < 300) {
-        resolve(response);
-        // window.setTimeout(() => resolve(response), Math.random() * 2000 + 3000);
+        resolve(response)
+        // window.setTimeout(() => resolve(response), Math.random() * 2000 + 5000)
       } else {
-        reject(new Error(response.statusText));
+        reject(new Error(response.statusText))
       }
-    });
+    })
   },
   handleJSON(response) {
     return response.json()
   }
 }
 
-
-export function getProducts() {
-  return fetch(API_ROOT + 'catalog.json');
+function fetchData(url) {
+  return fetch(url).then(utils.handleStatus).then(utils.handleJSON)
 }
 
-// export function getProduct(id) {
-//   return fetch(`${API_ROOT}/product/${id}`);
-// }
+export function getProducts() {
+  return fetchData(API_ROOT + 'catalog.json')
+}
 
-export function getCategories() {
-  return fetch(API_ROOT + 'categories.json');
+export async function getCategories() {
+  return fetchData(API_ROOT + 'categories.json')
 }

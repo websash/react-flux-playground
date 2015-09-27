@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import CartStore from '../../stores/CartStore';
-import storesConnector from '../../utils/storesConnector';
-import joinClasses from 'react/lib/joinClasses';
-import s from './Cart.css';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
+import CartStore from '../../stores/CartStore'
+import storesConnector from '../../utils/storesConnector'
+import joinClasses from 'react/lib/joinClasses'
+import s from './Cart.css'
 
 function stateFromStores(props) {
   return {
@@ -22,13 +22,13 @@ class CartSummary extends React.Component {
   }
 
   render() {
-    const { items, total, className } = this.props;
+    const {items, total, className} = this.props
     return (
-      <Link to="cart" className={joinClasses(className, s.cartsummary)}>
+      <Link to="/cart" className={joinClasses(className, s.cartsummary)}>
         Cart: { items.length > 0 ? `${items.length} / $${total}` : `empty` }
       </Link>
     )
   }
 }
 
-export default CartSummary;
+export default CartSummary

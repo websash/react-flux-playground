@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import joinClasses from 'react/lib/joinClasses';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
+import joinClasses from 'react/lib/joinClasses'
 import s from './Button.css'
 
 class Button extends React.Component {
@@ -10,7 +10,7 @@ class Button extends React.Component {
   }
 
   render() {
-    const { navTo, children, className } = this.props;
+    const {navTo, children, className} = this.props
     return (
       navTo
       ? <Link to={navTo} {...this.props} className={joinClasses(className, s.btn)}>
@@ -21,4 +21,4 @@ class Button extends React.Component {
   }
 }
 
-export default Button;
+export default Button

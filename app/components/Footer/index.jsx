@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
-import s from './Footer.css';
+import React from 'react'
+import {Link} from 'react-router'
+import s from './Footer.css'
 
 class Footer extends React.Component {
   render() {
@@ -20,8 +20,8 @@ class Footer extends React.Component {
           </ul>
         </div>
       </footer>
-    );
+    )
   }
 }
 
-export default Footer;
+export default Footer

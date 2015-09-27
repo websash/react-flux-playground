@@ -1,0 +1,59 @@
+@import '../../styles/vars.css';
+
+.spinner{
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  animation: fadeout .5s ease-out both;
+  user-select: none;
+}
+.spinner.active {
+  animation: fadein .5s ease-out both;
+}
+.timer {
+  width: 18px;
+  height: 18px;
+  box-shadow: inset 0px 0px 0px 2px color(var(--color1) l(+5%));
+  border-radius: 50%;
+  position: relative;
+  top: -1px;
+ }
+.timer::after, .timer::before {
+  position: absolute;
+  content: "";
+  background-color: color(var(--color1) l(+5%));
+}
+.timer::after {
+  width: 7px;
+  height: 2px;
+  top: 8px;
+  left: 8px;
+  transform-origin: 1px 1px;
+  border-radius: 1px;
+  animation: minhand .75s linear infinite;
+}
+.timer::before {
+  width: 5px;
+  height: 2px;
+  top: 8px;
+  left: 8px;
+  transform-origin: 1px 1px;
+  border-radius: 1px;
+  animation: hrhand 3s linear infinite;
+}
+
+@keyframes minhand {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes hrhand {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes fadein {
+  100% { opacity: 1; }
+}
+@keyframes fadeout {
+  100% { opacity: 0; }
+}

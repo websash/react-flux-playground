@@ -1,39 +1,46 @@
-import React, { PropTypes } from 'react';
-import { RouteHandler } from 'react-router';
-import Categories from '../components/Categories';
-import CategoriesStore from '../stores/CategoriesStore';
-import storesConnector from '../utils/storesConnector';
-import s from './views.css';
+import React, {PropTypes, cloneElement} from 'react'
+import PrListing from '../components/Products/Listing'
+import Categories from '../components/Categories'
+import ProductsStore from '../stores/ProductsStore'
+import CategoriesStore from '../stores/CategoriesStore'
+import storesConnector from '../utils/storesConnector'
+import Spinner from '../components/Spinner'
+import s from './views.css'
+
+// const { CSSTransitionGroup } = React.addons
 
 function stateFromStores(props) {
-  return { category: CategoriesStore.getCategory(props) }
+  return {
+    title: ProductsStore.getTitle(props),
+    catalog: ProductsStore.getCatalog(props),
+    category: CategoriesStore.getCategory(props)
+  }
 }
 
-@storesConnector([CategoriesStore], stateFromStores)
+@storesConnector([ProductsStore, CategoriesStore], stateFromStores)
 class ProductsVew extends React.Component {
 
   render() {
-    const { path, params, category } = this.props;
-
-    const title =
-      path.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
-      path.match(/sales$/) && `Sales` ||
-      path.match(/category/) && category && `Category: ${category.name}` || '';
+    const {title, location: {pathname}, category, children} = this.props
 
     return (
       <section className={s.main}>
         <div className={s.primary}>
-          <h1 className="spinner">{title}</h1>
-          <div className="fadetarget">
-            <RouteHandler L="2" XL="3" {...this.props} />
-          </div>
+          <h1>{title} <Spinner active={ProductsStore.pending} /></h1>
+          {/* <CSSTransitionGroup component="div" transitionName="view"> */}
+          {
+            cloneElement(children || <PrListing/>,
+              {L: '2', XL: '3', key: pathname, ...this.props})
+            // children || <PrListing L="2" XL="3" key={pathname} {...this.props}/>
+          }
+          {/* </CSSTransitionGroup> */}
         </div>
         <div className={s.secondary}>
-          <Categories category={category} />
+          <Categories {...this.props} />
         </div>
       </section>
     )
   }
 }
 
-export default ProductsVew;
+export default ProductsVew

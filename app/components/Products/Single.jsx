@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
-import { Link, History } from 'react-router';
-import Button from '../Button';
-import * as acr from '../../actionCreators';
-import ProductsStore from '../../stores/ProductsStore';
-import storesConnector from '../../utils/storesConnector';
-import joinClasses from 'react/lib/joinClasses';
-import DOMPurify from 'dompurify';
-import s from './Single.css';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
+import Button from '../Button'
+import * as acr from '../../actionCreators'
+import ProductsStore from '../../stores/ProductsStore'
+import storesConnector from '../../utils/storesConnector'
+import joinClasses from 'react/lib/joinClasses'
+import DOMPurify from 'dompurify'
+import s from './Single.css'
 
 function stateFromStores(props) {
   return { product: ProductsStore.getProduct(props) }
@@ -21,40 +21,38 @@ class Single extends React.Component {
   }
 
   static contextTypes = {
-    router: PropTypes.func.isRequired
+    history: PropTypes.object.isRequired
   }
 
   componentWillMount() {
-    acr.requestProducts();
+    acr.requestProducts()
   }
 
   render() {
-    const { product, className } = this.props;
-    const { router } = this.context;
+    const {product: p, className} = this.props
+    const {history} = this.context
 
     return (
-      <div className={joinClasses(s.products,
-          ProductsStore.pending && 'pending', className)}>
+      <div className={joinClasses(s.products, className)}>
       {
-        product &&
-        <div>
-          <h2 className={s.itmTitle}>{product.title}</h2>
+        p && <div>
+          <h2 className={s.itmTitle}>{p.title}</h2>
           <div className={s.body}>
-            <img className={s.itmImg} src={product.image} alt="product" />
+            <img className={s.itmImg} src={p.image} alt="product" />
             <div className={s.itmDescription}
-              dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(product.description)}}></div>
+              dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(p.description)}}></div>
           </div>
 
           <div className={s.itmMeta}>
-            { product.sale_price && <p className={s.itmPrice}>${product.sale_price}</p> }
-            <p className={joinClasses(s.itmPrice, product.sale_price && s.oldPrice)}>
-              ${product.price}
+            {p.sale_price && <p className={s.itmPrice}>${p.sale_price}</p>}
+            <p className={joinClasses(s.itmPrice, p.sale_price && s.oldPrice)}>
+              ${p.price}
             </p>
             <div className={s.btns}>
               <Button className={s.btn}
-                onClick={acr.addItem.bind(this, product)}>Add To Cart</Button>
-              <Button className={s.btn} navTo="products" onClick={(e) =>
-                History.length > 1 ? (e.preventDefault(), router.goBack()) : true}>
+                onClick={acr.addProduct.bind(this, p)}>Add To Cart</Button>
+              <Button className={s.btn} navTo="/products">
+                {/* need route referrer  */}
                 Back To Catalog
               </Button>
             </div>
@@ -66,4 +64,4 @@ class Single extends React.Component {
   }
 }
 
-export default Single;
+export default Single

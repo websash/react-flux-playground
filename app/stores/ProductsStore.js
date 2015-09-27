@@ -1,58 +1,60 @@
-import * as ACT from '../actionTypes';
-import { register } from '../dispatcher';
-import { createStore } from '../utils/StoreUtils';
+import * as ACT from '../actionTypes'
+import {register, waitFor} from '../dispatcher'
+import {createStore} from '../utils/StoreUtils'
+import CategoriesStore from './CategoriesStore'
 
-let _catalog = [];
+let _catalog = []
+
+const dispatcherCallback = action => {
+  switch(action.type) {
+    case ACT.REQUEST_PRODUCTS:
+      Store.pending = true
+      break
+
+    case ACT.REQUEST_PRODUCTS_SUCCESS:
+      waitFor([CategoriesStore.dispatchToken])
+      Store.pending = false
+      _catalog = action.data
+      break
+
+    case ACT.REQUEST_PRODUCTS_FAIL:
+      Store.pending = false
+      // alert(`[${action.error}] ${ACT.REQUEST_PRODUCTS_FAIL}`)
+      break
+  }
+  Store.emitChange()
+}
 
 const Store = createStore({
   pending: false,
 
-  getCatalog(props) {
-    const { path, params } = props;
+  getCatalog({location: {pathname: pn}, params: {categoryId: cid}}) {
+    return (
+      /^\/$/.test(pn) && _catalog.filter(product => product.featured) ||
 
-    const catalog =
+      /^\/sales$/.test(pn) && _catalog.filter(product => product.sale_price) ||
 
-      /^\/$/.test(path) && _catalog.filter(product => product.featured) ||
+      /\/category/.test(pn) && cid && /^[0-9]+$/.test(cid) &&
+          _catalog.filter(product => cid == product.category_id) ||
 
-      /^\/sales$/.test(path) && _catalog.filter(product => product.sale_price) ||
-
-      /\/category/.test(path) && params.categoryId && /^[0-9]+$/.test(params.categoryId) &&
-        _catalog.filter(product => params.categoryId == product.category_id) ||
-
-      _catalog;
-
-    return catalog;
+      _catalog
+    )
   },
 
-  getProduct(props) {
-    const { params } = props;
-    return params.productId && /^[0-9]+$/.test(params.productId) &&
-      _catalog.filter(product => params.productId == product.id)[0];
+  getProduct({params: {productId: pid}}) {
+    return pid && /^[0-9]+$/.test(pid) && _catalog.filter(product => pid == product.id)[0]
   },
 
-  dispatchToken: register(action => {
-    switch(action.type) {
-      case ACT.REQUEST_PRODUCTS:
-        Store.pending = true;
-        break;
+  getTitle({location: {pathname: pn}, params}) {
+    const category = CategoriesStore.getCategory({params})
+    return (
+      pn.match(/products(\/[0-9]+\/[0-9]+)?$/) && `Products` ||
+      pn.match(/sales$/) && `Sales` ||
+      pn.match(/category/) && category && `Category: ${category.name}` || ''
+    )
+  },
 
-      case ACT.REQUEST_PRODUCTS_SUCCESS:
-        Store.pending = false;
-        _catalog = action.data;
-        break;
+  dispatchToken: register(dispatcherCallback)
+})
 
-      case ACT.REQUEST_PRODUCTS_FAIL:
-        Store.pending = false;
-        break;
-
-      default:
-        return true;
-    }
-
-    Store.emitChange();
-    return true;
-  })
-
-});
-
-export default Store;
+export default Store

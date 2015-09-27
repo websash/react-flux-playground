@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { ItmIncrease, ItmDecrease, ItmRemove } from './CartControls';
-import CartStore from '../../stores/CartStore';
-import storesConnector from '../../utils/storesConnector';
-import s from './Cart.css';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
+import {ItmIncrease, ItmDecrease, ItmRemove} from './CartControls'
+import CartStore from '../../stores/CartStore'
+import storesConnector from '../../utils/storesConnector'
+import s from './Cart.css'
 
 function stateFromStores(props) {
   return {
@@ -21,7 +21,7 @@ export default class Cart extends React.Component {
   }
 
   render() {
-    const { items, total } = this.props;
+    const {items, total} = this.props
     return (
       <table className={s.cart}>
       {
@@ -38,22 +38,22 @@ export default class Cart extends React.Component {
       <tbody>
       {
         items.length > 0
-        ? items.map((cartItem, i) => {
-            const { id, category_id, title, price, sale_price } = cartItem.item;
+        ? items.map(itm => {
+            const {id, category_id, title, price, sale_price} = itm.product
             return (
-              <tr key={i}>
+              <tr key={id}>
                 <td>
-                  <Link to="product" params={{productId: id, categoryId: category_id}}>
+                  <Link to={`/products/${category_id}/${id}`}>
                     {title}</Link>
                 </td>
-                <td className={s.right}>{cartItem.qty} <span className={s.btnGroup}>
-                    <ItmIncrease index={i} /><ItmDecrease index={i} />
+                <td className={s.right}>{itm.qty} <span className={s.btnGroup}>
+                    <ItmIncrease item={itm} /><ItmDecrease item={itm} />
                   </span>
                 </td>
                 <td className={s.right}>
-                  ${+((sale_price || price) * cartItem.qty).toFixed(2)}
+                  ${+((sale_price || price) * itm.qty).toFixed(2)}
                 </td>
-                <td className={s.right}><ItmRemove index={i} /></td>
+                <td className={s.right}><ItmRemove item={itm} /></td>
               </tr>
             )
           })
